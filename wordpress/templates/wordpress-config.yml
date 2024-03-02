@@ -1,0 +1,32 @@
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+
+  name: day5-wordpress-config
+
+data:
+
+  WORDPRESS_DATABASE_HOST: day5-mariadb-service
+
+  MARIADB_USER: hng_wordpress 
+
+  MARIADB_DATABASE: hng11_wordpress
+
+  ALLOW_EMPTY: "yes"
+
+---
+apiVersion: v1
+
+kind: Secret
+
+metadata:
+
+  name: day5-wordpress-secrets
+
+type: Opaque
+
+data:
+  MARIADB_PASSWORD: aG5nMTFfMjAyNA==
+

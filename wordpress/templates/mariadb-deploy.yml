@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: day5-mariadb-deployment
+
+spec:
+
+  replicas: 1
+
+  selector:
+
+    matchLabels:
+
+      app: day5-mariadb
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: day5-mariadb
+
+    spec:
+
+      containers:
+
+      - name: day5-mariadb
+
+        image: hngtech11/mariadb:day1
+
+        env:
+          - name: MARIADB_USER
+
+            valueFrom:
+
+              configMapKeyRef:
+
+                name: day5-wordpress-config
+
+                key: MARIADB_USER
+
+
+          - name: MARIADB_PASSWORD
+
+            valueFrom:
+
+              secretKeyRef:
+
+                name: day5-wordpress-secrets
+
+                key: MARIADB_PASSWORD
+
+
+
+          - name: MARIADB_DATABASE
+
+            valueFrom:
+
+              configMapKeyRef:
+
+                name: day5-wordpress-config
+
+                key: MARIADB_DATABASE
+
